@@ -1,8 +1,124 @@
 ﻿@page "/"
 @page "/dashboard"
 
-<h3>Dashboard</h3>
+@*<MRow>
+    <MCol Cols="3" style="display: flex">
+        <MCard Color="red lighten-5"
+               Elevation="13"
+               Hover="true"
+               Outlined="true"
+        Height="200">
+            <div class="color_block">
+                <h2 class="font-weight-black text-center">今日签到人数</h2>
+                <h1 class="font-weight-black text-center">34</h1>
+        </div>
 
+        </MCard>
+    </MCol>
+</MRow>*@
+<MRow>
+    <MCol Cols="12">
+        <MCard Elevation="8">
+            <MECharts Option="_option2" Width="@("100%")" Height="300">
+            </MECharts>
+        </MCard>
+    </MCol>
+</MRow>
+<MRow>
+    <MCol Cols="12">
+        <MCard Elevation="8">
+            <MECharts Option="_option" Width="@("100%")" Height="300">
+            </MECharts>
+        </MCard>
+    </MCol>
+</MRow>
 @code {
+
+    private object _option = new
+    {
+        Title = new
+        {
+            Text = "工资总额"
+        },
+        Tooltip = new
+        {
+            Trigger="axis"
+        },
+        Legend = new
+        {
+            Data = new[] { "月产生工资" }
+        },
+        XAxis = new
+        {
+            Data = new[] { "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03" }
+        },
+        YAxis = new { },
+        Series = new[]
+        {
+            new
+            {
+                Name = "月产生工资",
+                Type = "bar",
+                Data = new[] {234567,879637,1203045,890723,345685,1732356,323456,767898,1002434,976859,500045,1112367},
+                MarkLine = new
+                {
+                     Data = new[]
+                    {
+                        new
+                        {
+                            Type="min",
+                             Name="最小值"
+                        },
+                         new
+                         {
+                             Type="max",
+                              Name="最大值"
+                         },
+                         new{
+                             Type="average",
+                              Name="平均金额"
+                         }
+                    }
+                }
+
+            }
+         }
+    };
+
+    private object _option2 = new
+    {
+        Title = new
+        {
+            Text = "签到记录"
+        },
+        Tooltip = new
+        {
+            Trigger = "axis"
+        },
+        Legend = new
+        {
+            Data = new[] { "签到人数", "在职人数" }
+        },
+        XAxis = new
+        {
+            Data = new[] { "2023-03-09", "2023-03-10", "2023-03-11", "2023-03-12", "2023-03-13", "2023-03-14", "2023-03-15" }
+        },
+        YAxis = new { },
+        Series = new[]
+    {
+            new
+            {
+                Name = "签到人数",
+                Type = "line",
+                Data = new[] { 74,72,77,79,78,79,75}
+            },
+            new
+            {
+                Name = "在职人数",
+                Type = "line",
+                Data = new[] { 80,80,80,79,79,78,79}
+            }
+     }
+    };
 
 }

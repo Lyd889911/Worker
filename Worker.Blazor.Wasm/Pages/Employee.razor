@@ -1,9 +1,16 @@
 ﻿@page "/employee"
 
 <MRow>
-
-    <MCol>
-        选择状态：
+    <MCol Cols="1" >
+        <MButton Color="pink"
+                 Dark
+                 Fab>
+            <MIcon>
+                mdi-plus
+            </MIcon>
+        </MButton>
+    </MCol>
+    <MCol Cols="3" >
         <MSelect Solo TItem="Model"
                  TItemValue="string"
                  TValue="string"
@@ -17,8 +24,7 @@
                  OnSelectedItemUpdate="item=>_selected=item">
         </MSelect>
     </MCol>
-    <MCol>
-        工作种类：
+    <MCol Cols="3" >
         <MSelect Solo TItem="Model"
                  TItemValue="string"
                  TValue="string"
@@ -32,33 +38,60 @@
                  OnSelectedItemUpdate="item=>_selected=item">
         </MSelect>
     </MCol>
-    <MCol>
-        检索：
+    <MCol Cols="3" >
         <MTextField @bind-Value="_message1"
             Solo
                     Clearable
-        AppendIcon="mdi-account-search">
+        Hint="请输入检索内容">
         </MTextField>
+    </MCol>
+    <MCol Cols="2" >
+        <MButton
+                 Fab
+                 Dark
+                 Color="indigo">
+            <MIcon>mdi-account-search</MIcon>
+        </MButton>
     </MCol>
 </MRow>
 
 <MRow>
-<MCardText Style="height: 100px; position: relative">
-                    <FabTransition>
-                        <MButton Color="pink"
-                                 Show="true"
-                                 Dark
-                                 Absolute
-                                 Top
-                                 Right
-                                 Fab>
-                            <MIcon>
-                                mdi-plus
-                            </MIcon>
-                        </MButton>
-                    </FabTransition>
-                </MCardText>
+    <MCol Cols="12">
+        <MDataTable Headers="_headers"
+                    Items="GetWorkers()"
+                    ItemsPerPage="10"
+                    Class="elevation-1"
+                    HideDefaultFooter="true"
+        ItemKey="x=>x.Name"
+        Search="@_message1"
+                    Width="@("120%")"
+                    FixedRight>
+            <ItemColContent>
+                @if (context.Header.Value == "actions")
+                {
+                    <MIcon Small
+                       Class="mr-2"
+                       OnClick="()=>EditItem(context.Item)">mdi-pencil</MIcon>
+                    <MIcon Small
+                       OnClick="()=>DeleteItem(context.Item)">mdi-delete</MIcon>
+                }
+                else
+                {
+                    @context.Value
+                }
+            </ItemColContent>
+    </MDataTable>
+    </MCol>
 </MRow>
+
+<MRow>
+    <MCol Cols="6" Offset="3">
+        <div class="text-center">
+            <MPagination @bind-Value="_index" Length=@_total></MPagination>
+        </div>
+    </MCol>
+</MRow>
+
 @code {
     public class Model
     {
@@ -66,8 +99,10 @@
         public string State { get; set; }
         public string Abbr { get; set; }
     }
-    private string _message1 = "检索";
+    private string _message1 = "";
     private string _select = "FL";
+    private int _index = 1;
+    private int _total = 50;
     private Model _selected = new Model()
         {
             State = "Florida",
@@ -106,4 +141,81 @@
                 Id=5
             }
         };
+  }
+  @code {
+    public record Worker
+    {
+        public string Name { get; set; }
+        public string Sex{ get; set; }
+        public string Type{ get; set; }
+        public string Phone{ get; set; }
+        public string IDCard{ get; set; }
+        public string BankID{ get; set; }
+        public string BankName{ get; set; }
+        public decimal DaySalary{ get; set; }
+        public decimal HourSalary{ get; set; }
+    }
+    private void EditItem(Worker worker)
+    {
+        Console.WriteLine(worker.ToString());
+    }
+    private void DeleteItem(Worker worker)
+    {
+        Console.WriteLine(worker.ToString());
+    }
+    private List<DataTableHeader<Worker>> _headers = new List<DataTableHeader<Worker>>
+        {
+           new ()
+           {
+            Text= "姓名",
+            Align= DataTableHeaderAlign.Start,
+            Sortable= false,
+            Value= nameof(Worker.Name)
+          },
+          new (){ Text= "性别", Value= nameof(Worker.Sex)},
+          new (){ Text= "工作种类", Value= nameof(Worker.Type)},
+          new (){ Text= "电话", Value= nameof(Worker.Phone)},
+          new (){ Text= "身份证", Value= nameof(Worker.IDCard)},
+          new (){ Text= "银行卡号", Value= nameof(Worker.BankID) },
+          new (){ Text= "开户银行", Value= nameof(Worker.BankName) },
+          new (){ Text= "日薪/元", Value= nameof(Worker.DaySalary) },
+          new (){ Text= "时薪/元", Value= nameof(Worker.HourSalary) },
+          new (){ Text= "操作", Value= "actions",Sortable=false,Width="100px",Align=DataTableHeaderAlign.Center, }
+        };
+
+    private List<Worker> _workers = new List<Worker>
+        {
+           new Worker()
+           {
+               Name="张三",
+               Sex="男",
+               Type="木工",
+               Phone="12345678901",
+               IDCard="123456789012345678",
+               BankID="1223234525657678",
+               BankName="重庆渝中区第一人民银行",
+               DaySalary=360.5m,
+               HourSalary=35m
+           }
+        };
+    private List<Worker> GetWorkers()
+    {
+        for(int i = 0; i < 50; i++)
+        {
+            Worker w = new Worker()
+                {
+                    Name = "张三" + i,
+                    Sex = i % 2 == 0 ? "男" : "女",
+                    Type = i % 3 == 0 ? "大工" : "小工",
+                    Phone = "12345678901",
+                    IDCard = "123456789012345678",
+                    BankID = "1223234525657678",
+                    BankName = "重庆渝中区第一人民银行",
+                    DaySalary = 100 + i * 0,
+                    HourSalary = i * 15
+                };
+            _workers.Add(w);
+        }
+        return _workers;
+    }
   }
