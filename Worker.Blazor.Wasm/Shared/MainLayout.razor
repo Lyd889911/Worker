@@ -1,0 +1,24 @@
+﻿<!-- MainLayout.razor -->
+@inherits LayoutComponentBase
+
+<MApp>
+    <MNavigationDrawer App @bind-Value="_b">
+        <LydNavigation></LydNavigation>
+    </MNavigationDrawer>
+    <LydAppBar ChangeDrawer=@ChangeDrawer></LydAppBar>
+  <!-- 根据应用组件来调整你的内容 -->
+  <MMain>
+    <!-- 给应用提供合适的间距 -->
+    <MContainer Fluid>
+        @Body
+    </MContainer>
+  </MMain>
+
+  <MFooter App>
+    <!-- -->
+  </MFooter>
+</MApp>
+@code{
+    bool _b=true;
+    void ChangeDrawer()=>_b=!_b; 
+}
