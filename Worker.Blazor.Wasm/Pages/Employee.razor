@@ -43,14 +43,192 @@
                  Color="indigo">
             <MIcon>mdi-account-search</MIcon>
         </MButton>
-        <MButton Color="pink"
-                 Dark
-                 Fab
-        OnClick="AddWorker">
-            <MIcon>
-                mdi-plus
-            </MIcon>
-        </MButton>
+
+        <PModal @bind-Value="value"
+                Persistent
+                Title="添加员工"
+                Width="1000"
+                SaveProps="props => props.Outlined = true"
+                CancelProps="@(props => props.Color = "orange")"
+                DeleteProps="@(props => props.Style = "font-weight:bold;")"
+                OnSave="OnSave"
+                OnCancel="OnCancel"
+                OnDelete="OnDelete">
+            <ActivatorContent>
+                <MButton Color="pink"
+                          Dark
+                          Fab
+                         @attributes="@context.Attrs">
+                    <MIcon>
+                        mdi-plus
+                    </MIcon>
+                </MButton>
+            </ActivatorContent>
+            <ChildContent>
+                <MRow>
+                    <MCol Cols="4">
+                        <span>姓名：</span>
+                        <MTextField @bind-Value="_name"
+                                        Solo
+                                        Clearable
+                                    Hint="请输入员工的姓名"></MTextField>
+                        </MCol>
+                        <MCol Cols="3">
+                        <span>选择职业：</span>
+                        <MSelect Solo TItem="Model"
+                                 TItemValue="string"
+                                 TValue="string"
+                                 @bind-Value="_select"
+                                 Hint="@($"{_selected.State}, {_selected.Abbr}")"
+                                 Items="_states"
+                                 ItemText="r=>r.State"
+                                 ItemValue="r=>r.Abbr"
+                                 Label="Select"
+                                  PersistentHint
+                                 OnSelectedItemUpdate="item=>_selected=item">
+                        </MSelect>
+                        </MCol>
+                        <MCol Cols="3">
+                        <span>选择部门：</span>
+                        <MSelect Solo TItem="Model"
+                                 TItemValue="string"
+                                 TValue="string"
+                                 @bind-Value="_select"
+                                 Hint="@($"{_selected.State}, {_selected.Abbr}")"
+                                 Items="_states"
+                                 ItemText="r=>r.State"
+                                 ItemValue="r=>r.Abbr"
+                                 Label="Select"
+                                  PersistentHint
+                                 OnSelectedItemUpdate="item=>_selected=item">
+                        </MSelect>
+                        </MCol>
+                        <MCol Cols="2">
+                        <span>操作状态：</span>
+                        <MSelect Solo TItem="Model"
+                                 TItemValue="string"
+                                 TValue="string"
+                                 @bind-Value="_select"
+                                 Hint="@($"{_selected.State}, {_selected.Abbr}")"
+                                 Items="_states"
+                                 ItemText="r=>r.State"
+                                 ItemValue="r=>r.Abbr"
+                                 Label="Select"
+                                  PersistentHint
+                                 OnSelectedItemUpdate="item=>_selected=item">
+                        </MSelect>
+                        </MCol>
+                        </MRow>
+                        <MRow>
+                        <MCol Cols="2">
+                        <span>选择性别：</span>
+                        <MRadioGroup @bind-Value="_sex" Row>
+                            <ChildContent>
+                                <MRadio Value="@("男")">
+                                    <LabelContent>
+                                        <strong style="color:midnightblue">男</strong>
+                                    </LabelContent>
+                                </MRadio>
+                                <MRadio Value="@("女")">
+                                    <LabelContent>
+                                        <strong style="color:deeppink">女</strong>
+                                    </LabelContent>
+                                </MRadio>
+                            </ChildContent>
+                        </MRadioGroup>
+                    </MCol>
+                    <MCol Cols="2">
+                        <span>日薪：</span>
+                        <MTextField @bind-Value="_name"
+                                        Solo
+                                        Clearable
+                                    Hint="请输入该员工的日薪"></MTextField>
+                        </MCol>
+                        <MCol Cols="2">
+                        <span>时薪：</span>
+                        <MTextField @bind-Value="_name"
+                                        Solo
+                                        Clearable
+                                    Hint="请输入该员工的时薪"></MTextField>
+                        </MCol>
+                        <MCol Cols="3">
+                        <span>选择入职时间：</span>
+                        <MMenu @bind-Value="_menu2"
+                               CloseOnContentClick="false"
+                               NudgeRight="40"
+                               Transition="scale-transition"
+                               OffsetY
+                               MinWidth="@("auto")">
+                            <ActivatorContent>
+                                <MTextField @bind-Value="_date"
+                                            Label="Picker without buttons"
+                                            PrependIcon="mdi-calendar"
+                                                    Readonly
+                                                    Solo
+                                            @attributes="context.Attrs"></MTextField>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <MDatePicker @bind-Value="_date"
+                                             OnInput="()=>_menu2=false"></MDatePicker>
+                            </ChildContent>
+                            </MMenu>
+                            </MCol>
+                            <MCol Cols="3">
+                            <span>请选择头像照片：</span>
+                            <MFileInput TValue="IBrowserFile"
+                                    Accept="image/*"
+                                        Solo
+                                    TruncateLength="15">
+                        </MFileInput>
+                        </MCol>
+                        </MRow>
+                        <MRow>
+                        <MCol Cols="9">
+                        <MRow>
+                            <MCol Cols="6">
+                                <span>电话：</span>
+                                <MTextField @bind-Value="_name"
+                                                Solo
+                                                Clearable
+                                            Hint="请输入电话"></MTextField>
+                                </MCol>
+                                <MCol Cols="6">
+                                <span>身份证：</span>
+                                <MTextField @bind-Value="_name"
+                                                Solo
+                                                Clearable
+                                            Hint="请输入身份证号"></MTextField>
+                                </MCol>
+                                </MRow>
+                                <MRow>
+                                <MCol Cols="6">
+                                <span>银行卡号：</span>
+                                <MTextField @bind-Value="_name"
+                                                Solo
+                                                Clearable
+                                            Hint="请输入银行卡号"></MTextField>
+                                </MCol>
+                                <MCol Cols="6">
+                                <span>开户行名：</span>
+                                <MTextField @bind-Value="_name"
+                                                Solo
+                                                Clearable
+                                            Hint="请输入开户行名"></MTextField>
+                                </MCol>
+                                </MRow>
+                                </MCol>
+                                <MCol Cols="3">
+                                <MCard Elevation="10" Rounded="true">
+                                <MImage AspectRatio="1.1"
+                                    Width="300"
+                                    Src="https://cdn.masastack.com/stack/images/website/masa-blazor/parallax/material.jpg"></MImage>
+                                </MCard>
+                                </MCol>
+                                </MRow>
+
+                            </ChildContent>
+                            </PModal>
+
     </MCol>
 </MRow>
 
@@ -89,209 +267,3 @@
     </MCol>
 </MRow>
 
-<PModal @bind-Value="value" 
-        Persistent
-        Title="添加员工"
-        Width="1000"
-        SaveProps="props => props.Outlined = true"
-        CancelProps="@(props => props.Color = "orange")"
-        DeleteProps="@(props => props.Style = "font-weight:bold;")"
-        OnSave="OnSave" 
-        OnCancel="OnCancel" 
-        OnDelete="OnDelete">
-    <ActivatorContent>
-        <MButton @attributes="@context.Attrs">Activator</MButton>
-    </ActivatorContent>
-    <ChildContent>
-        <MRow>
-            <MCol Cols="6">
-                <MTextField @bind-Value="_name"
-                            Label="姓名"
-                            Outlined
-                            Clearable></MTextField>
-
-               <MContainer fluid>
-                    <MRadioGroup @bind-Value="_sex" Row>
-                        <LabelContent>
-                            <div><strong>选择性别</strong></div>
-                        </LabelContent>
-                        <ChildContent>
-                            <MRadio Value="@("男")">
-                                <LabelContent>
-                                    <strong class="success--text">男</strong>
-                                </LabelContent>
-                            </MRadio>
-                            <MRadio Value="@("女")">
-                                <LabelContent>
-                                    <strong class="primary--text">女</strong>
-                                </LabelContent>
-                            </MRadio>
-                        </ChildContent>
-                    </MRadioGroup>
-                </MContainer>
-
-            </MCol>
-            <MCol Cols="6"></MCol>
-        </MRow>
-    </ChildContent>
-</PModal>
-
-
-@code {
-    public class Model
-    {
-        public int Id { get; set; }
-        public string State { get; set; }
-        public string Abbr { get; set; }
-    }
-    private string _message1 = "";
-    private string _select = "FL";
-    private int _index = 1;
-    private int _total = 50;
-    private Model _selected = new Model()
-        {
-            State = "Florida",
-            Abbr = "FL"
-        };
-    private List<Model> _states = new List<Model>
-        {
-            new Model
-            {
-                State="Florida",
-                Abbr="FL",
-                Id=1
-            },
-            new Model
-            {
-                State="Georgia",
-                Abbr="GA",
-                Id=2
-            },
-            new Model
-            {
-                State="Nebraska",
-                Abbr="NE",
-                Id=3
-            },
-            new Model
-            {
-                State="California",
-                Abbr="CA",
-                Id=4
-            },
-            new Model
-            {
-                State="New York",
-                Abbr="NY",
-                Id=5
-            }
-        };
-  }
-  @code {
-    public record Worker
-    {
-        public string Name { get; set; }
-        public string Sex { get; set; }
-        public string Type { get; set; }
-        public string Phone { get; set; }
-        public string IDCard { get; set; }
-        public string BankID { get; set; }
-        public string BankName { get; set; }
-        public decimal DaySalary { get; set; }
-        public decimal HourSalary { get; set; }
-    }
-    private void EditItem(Worker worker)
-    {
-        Console.WriteLine(worker.ToString());
-    }
-    private void DeleteItem(Worker worker)
-    {
-        Console.WriteLine(worker.ToString());
-    }
-    private List<DataTableHeader<Worker>> _headers = new List<DataTableHeader<Worker>>
-        {
-           new ()
-           {
-            Text= "姓名",
-            Align= DataTableHeaderAlign.Start,
-            Sortable= false,
-            Value= nameof(Worker.Name)
-          },
-          new (){ Text= "性别", Value= nameof(Worker.Sex)},
-          new (){ Text= "工作种类", Value= nameof(Worker.Type)},
-          new (){ Text= "电话", Value= nameof(Worker.Phone)},
-          new (){ Text= "身份证", Value= nameof(Worker.IDCard)},
-          new (){ Text= "银行卡号", Value= nameof(Worker.BankID) },
-          new (){ Text= "开户银行", Value= nameof(Worker.BankName) },
-          new (){ Text= "日薪/元", Value= nameof(Worker.DaySalary) },
-          new (){ Text= "时薪/元", Value= nameof(Worker.HourSalary) },
-          new (){ Text= "操作", Value= "actions",Sortable=false,Width="100px",Align=DataTableHeaderAlign.Center, }
-        };
-
-    private List<Worker> _workers = new List<Worker>
-        {
-           new Worker()
-           {
-               Name="张三",
-               Sex="男",
-               Type="木工",
-               Phone="12345678901",
-               IDCard="123456789012345678",
-               BankID="1223234525657678",
-               BankName="重庆渝中区第一人民银行",
-               DaySalary=360.5m,
-               HourSalary=35m
-           }
-        };
-    private List<Worker> GetWorkers()
-    {
-        for (int i = 0; i < 50; i++)
-        {
-            Worker w = new Worker()
-                {
-                    Name = "张三" + i,
-                    Sex = i % 2 == 0 ? "男" : "女",
-                    Type = i % 3 == 0 ? "大工" : "小工",
-                    Phone = "12345678901",
-                    IDCard = "123456789012345678",
-                    BankID = "1223234525657678",
-                    BankName = "重庆渝中区第一人民银行",
-                    DaySalary = 100 + i * 0,
-                    HourSalary = i * 15
-                };
-            _workers.Add(w);
-        }
-        return _workers;
-    }
-  }
-  @code {
-
-    private bool value;
-
-    private async Task OnSave()
-    {
-        await Task.Delay(1000);
-
-        value = false;
-    }
-
-    private void OnCancel()
-    {
-        value = false;
-    }
-
-    private void OnDelete()
-    {
-        value = false;
-    }
-    private void AddWorker()
-    {
-        value = true;
-    }
-
-}
-@code{
-    private string _name;
-    private string _sex;
-
-}
