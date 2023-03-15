@@ -1,16 +1,8 @@
 ﻿@page "/employee"
+@using Masa.Blazor.Presets
 
 <MRow>
-    <MCol Cols="1" >
-        <MButton Color="pink"
-                 Dark
-                 Fab>
-            <MIcon>
-                mdi-plus
-            </MIcon>
-        </MButton>
-    </MCol>
-    <MCol Cols="3" >
+    <MCol Cols="3">
         <MSelect Solo TItem="Model"
                  TItemValue="string"
                  TValue="string"
@@ -24,7 +16,7 @@
                  OnSelectedItemUpdate="item=>_selected=item">
         </MSelect>
     </MCol>
-    <MCol Cols="3" >
+    <MCol Cols="3">
         <MSelect Solo TItem="Model"
                  TItemValue="string"
                  TValue="string"
@@ -38,19 +30,26 @@
                  OnSelectedItemUpdate="item=>_selected=item">
         </MSelect>
     </MCol>
-    <MCol Cols="3" >
+    <MCol Cols="3">
         <MTextField @bind-Value="_message1"
-            Solo
+                    Solo
                     Clearable
-        Hint="请输入检索内容">
+                    Hint="请输入检索内容">
         </MTextField>
     </MCol>
-    <MCol Cols="2" >
-        <MButton
-                 Fab
+    <MCol Cols="3">
+        <MButton Fab
                  Dark
                  Color="indigo">
             <MIcon>mdi-account-search</MIcon>
+        </MButton>
+        <MButton Color="pink"
+                 Dark
+                 Fab
+        OnClick="AddWorker">
+            <MIcon>
+                mdi-plus
+            </MIcon>
         </MButton>
     </MCol>
 </MRow>
@@ -62,8 +61,8 @@
                     ItemsPerPage="10"
                     Class="elevation-1"
                     HideDefaultFooter="true"
-        ItemKey="x=>x.Name"
-        Search="@_message1"
+                    ItemKey="x=>x.Name"
+                    Search="@_message1"
                     Width="@("120%")"
                     FixedRight>
             <ItemColContent>
@@ -72,15 +71,13 @@
                     <MIcon Small
                        Class="mr-2"
                        OnClick="()=>EditItem(context.Item)">mdi-pencil</MIcon>
-                    <MIcon Small
-                       OnClick="()=>DeleteItem(context.Item)">mdi-delete</MIcon>
                 }
                 else
                 {
                     @context.Value
                 }
             </ItemColContent>
-    </MDataTable>
+        </MDataTable>
     </MCol>
 </MRow>
 
@@ -91,6 +88,54 @@
         </div>
     </MCol>
 </MRow>
+
+<PModal @bind-Value="value" 
+        Persistent
+        Title="添加员工"
+        Width="1000"
+        SaveProps="props => props.Outlined = true"
+        CancelProps="@(props => props.Color = "orange")"
+        DeleteProps="@(props => props.Style = "font-weight:bold;")"
+        OnSave="OnSave" 
+        OnCancel="OnCancel" 
+        OnDelete="OnDelete">
+    <ActivatorContent>
+        <MButton @attributes="@context.Attrs">Activator</MButton>
+    </ActivatorContent>
+    <ChildContent>
+        <MRow>
+            <MCol Cols="6">
+                <MTextField @bind-Value="_name"
+                            Label="姓名"
+                            Outlined
+                            Clearable></MTextField>
+
+               <MContainer fluid>
+                    <MRadioGroup @bind-Value="_sex" Row>
+                        <LabelContent>
+                            <div><strong>选择性别</strong></div>
+                        </LabelContent>
+                        <ChildContent>
+                            <MRadio Value="@("男")">
+                                <LabelContent>
+                                    <strong class="success--text">男</strong>
+                                </LabelContent>
+                            </MRadio>
+                            <MRadio Value="@("女")">
+                                <LabelContent>
+                                    <strong class="primary--text">女</strong>
+                                </LabelContent>
+                            </MRadio>
+                        </ChildContent>
+                    </MRadioGroup>
+                </MContainer>
+
+            </MCol>
+            <MCol Cols="6"></MCol>
+        </MRow>
+    </ChildContent>
+</PModal>
+
 
 @code {
     public class Model
@@ -146,14 +191,14 @@
     public record Worker
     {
         public string Name { get; set; }
-        public string Sex{ get; set; }
-        public string Type{ get; set; }
-        public string Phone{ get; set; }
-        public string IDCard{ get; set; }
-        public string BankID{ get; set; }
-        public string BankName{ get; set; }
-        public decimal DaySalary{ get; set; }
-        public decimal HourSalary{ get; set; }
+        public string Sex { get; set; }
+        public string Type { get; set; }
+        public string Phone { get; set; }
+        public string IDCard { get; set; }
+        public string BankID { get; set; }
+        public string BankName { get; set; }
+        public decimal DaySalary { get; set; }
+        public decimal HourSalary { get; set; }
     }
     private void EditItem(Worker worker)
     {
@@ -200,7 +245,7 @@
         };
     private List<Worker> GetWorkers()
     {
-        for(int i = 0; i < 50; i++)
+        for (int i = 0; i < 50; i++)
         {
             Worker w = new Worker()
                 {
@@ -219,3 +264,34 @@
         return _workers;
     }
   }
+  @code {
+
+    private bool value;
+
+    private async Task OnSave()
+    {
+        await Task.Delay(1000);
+
+        value = false;
+    }
+
+    private void OnCancel()
+    {
+        value = false;
+    }
+
+    private void OnDelete()
+    {
+        value = false;
+    }
+    private void AddWorker()
+    {
+        value = true;
+    }
+
+}
+@code{
+    private string _name;
+    private string _sex;
+
+}

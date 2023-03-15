@@ -32,6 +32,21 @@
         </MCard>
     </MCol>
 </MRow>
+<MRow>
+    <MCol Cols="6">
+        <MCard Elevation="8">
+            <MECharts Option="_option3" Width="@("100%")" Height="300">
+            </MECharts>
+        </MCard>
+    </MCol>
+    <MCol Cols="6">
+        <MCard Elevation="8">
+            <MECharts Option="_option4" Width="@("100%")" Height="300">
+            </MECharts>
+        </MCard>
+    </MCol>
+</MRow>
+
 @code {
 
     private object _option = new
@@ -42,7 +57,7 @@
         },
         Tooltip = new
         {
-            Trigger="axis"
+            Trigger = "axis"
         },
         Legend = new
         {
@@ -82,7 +97,7 @@
                 }
 
             }
-         }
+     }
     };
 
     private object _option2 = new
@@ -121,4 +136,121 @@
      }
     };
 
+    private object _option4 = new
+    {
+        Title = new
+        {
+            Text = "部门员工占比",
+            Left = "center"
+        },
+        Tooltip = new
+        {
+            Trigger = "item"
+        },
+        Legend = new
+        {
+            Top = "90%",
+            Left="center"
+        },
+        Series = new[]
+        {
+            new
+            {
+                Name="工作种类",
+                Type="pie",
+                Radius = new[]
+                {
+                    "40%","70%"
+                },
+                AvoidLabelOverlap=false,
+                ItemStyle = new
+                {
+                    BorderRadius=10,
+                    BorderColor="#fff",
+                    BorderWidth=2
+                },
+                Label = new
+                {
+                    Show=false,
+                    Position="center"
+                },
+                Emphasis = new
+                {
+                    Label = new
+                    {
+                        Show=true,
+                        FontSize=20,
+                        FontWeight="bold"
+                    }
+                },
+                Data = new[]
+                {
+                    new
+                    {
+                        Name = "环保部门",
+                        Value=24
+                    } ,
+                    new
+                    {
+                        Name = "油漆部门",
+                        Value=67
+                    } ,
+                    new
+                    {
+                        Name = "装修部门",
+                        Value=77
+                    }
+                }
+
+
+            }
+    }
+    };
+
+        private object _option3 = new
+    {
+        Title = new
+        {
+            Text = "在职工作种类占比",
+            Left = "center"
+        },
+        Tooltip = new
+        {
+            Trigger = "item"
+        },
+        Legend = new
+        {
+            Orient = "vertical",
+            Left = "left"
+        },
+        Series = new[]
+        {
+            new
+            {
+                Name="工作种类",
+                Type="pie",
+                Radius="50%",
+                Data = new[]
+                {
+                    new
+                    {
+                        Name = "大工",
+                        Value=24
+                    } ,
+                    new
+                    {
+                        Name = "小工",
+                        Value=67
+                    } ,
+                    new
+                    {
+                        Name = "杂工",
+                        Value=77
+                    }
+                }
+
+
+            }
+    }
+    };
 }
