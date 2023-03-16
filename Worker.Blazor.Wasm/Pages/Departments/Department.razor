@@ -1,0 +1,106 @@
+﻿@page "/department"
+
+<MRow>
+    <MCol Cols="4">
+        <MTextField 
+            @bind-Value="_message1"
+            Solo
+            Clearable
+            Hint="请输入检索内容">
+        </MTextField>
+    </MCol>
+    <MCol Cols="3">
+        <MButton 
+            Fab
+            Dark
+            Color="indigo">
+            <MIcon>mdi-account-search</MIcon>
+        </MButton>
+        <Department_Modal></Department_Modal>
+        
+    </MCol>
+</MRow>
+
+<MRow>
+    <MCol Cols="12" >
+        <Department_Table></Department_Table>
+    </MCol>
+</MRow>
+
+<MRow>
+    <MCol Cols="6" Offset="3">
+        <div class="text-center">
+            <MPagination 
+                @bind-Value="_index" 
+                Length=@_total>
+            </MPagination>
+        </div>
+    </MCol>
+</MRow>
+
+@code {
+    protected string _message1;
+    protected bool value;
+    protected string _depname;
+    protected int _index = 1;
+    protected int _total = 16;
+    protected async Task OnSave()
+    {
+        await Task.Delay(1000);
+
+        value = false;
+    }
+
+    protected void OnCancel()
+    {
+        value = false;
+    }
+
+    protected void OnDelete()
+    {
+        value = false;
+    }
+    protected record DepartmentItem
+    {
+        public string Id{ get; set; }
+        public string DepName{ get; set; }
+        public int Count{ get; set; }
+    }
+
+    protected List<DataTableHeader<DepartmentItem>> _headers = new List<DataTableHeader<DepartmentItem>>
+        {
+           new ()
+           {
+            Text= "部门名称",
+            Sortable= false,
+            Value= nameof(DepartmentItem.DepName)
+          },
+          new (){ Text= "部门人数", Value= nameof(DepartmentItem.Count)},
+          new(){Text="操作",Value="actions"}
+        };
+    protected List<DepartmentItem> _desserts = new List<DepartmentItem>
+    {
+        new DepartmentItem
+        {
+            Id="1",
+            DepName="消防部门",
+            Count=45
+        },
+                new DepartmentItem
+        {
+            Id="2",
+            DepName="装修部门",
+            Count=145,
+        },
+                new DepartmentItem
+        {
+            Id="3",
+            DepName="打杂部门",
+            Count=45,
+        },
+    };
+    protected void EditItem(DepartmentItem department)
+    {
+        Console.WriteLine(department.ToString());
+    }
+}

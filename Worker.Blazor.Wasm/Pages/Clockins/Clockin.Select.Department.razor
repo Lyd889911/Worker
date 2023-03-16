@@ -1,0 +1,14 @@
+﻿@inherits Clockin
+
+<MSelect Solo
+    TItem="Department"
+    TItemValue="string"
+    TValue="string"
+    @bind-Value="_select"
+    Items="_states"
+    ItemText="r=>r.DepartName"
+    ItemValue="r=>r.Id"
+    Label="Select"
+    PersistentHint
+    OnSelectedItemUpdate="item=>_selected=item">
+</MSelect>

@@ -1,0 +1,37 @@
+﻿@inherits Department
+@using Masa.Blazor.Presets
+
+<PModal 
+    @bind-Value="value"
+    Persistent
+    Title="添加部门"
+    Width="400"
+    SaveProps="props => props.Outlined = true"
+    CancelProps="@(props => props.Color = "orange")"
+    DeleteProps="@(props => props.Style = "font-weight:bold;")"
+    OnSave="OnSave"
+    OnCancel="OnCancel"
+    OnDelete="OnDelete">
+    <ActivatorContent>
+        <MButton 
+            Color="pink"
+            Dark
+            Fab
+            @attributes="@context.Attrs">
+            <MIcon>mdi-plus</MIcon>
+        </MButton>
+    </ActivatorContent>
+    <ChildContent>
+        <MRow>
+            <MCol Cols="12">
+                <span>部门姓名：</span>
+                <MTextField 
+                    @bind-Value="_depname"
+                    Solo
+                    Clearable
+                    Hint="请输入部门的姓名">
+                </MTextField>
+            </MCol>
+        </MRow>
+    </ChildContent>
+</PModal>

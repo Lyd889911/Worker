@@ -1,0 +1,26 @@
+﻿@inherits Department
+
+<MDataTable 
+    Headers="_headers"
+    Items="_desserts"
+    ItemsPerPage="10"
+    Class="elevation-1"
+    HideDefaultFooter="true"
+    ItemKey="x=>x.Id"
+    Search="@_message1">
+    <ItemColContent>
+    @if (context.Header.Value == "actions")
+    {
+        <MIcon 
+            Small
+            Class="mr-2"
+            OnClick="()=>EditItem(context.Item)">
+            mdi-pencil
+        </MIcon>
+    }
+    else
+    {
+        @context.Value
+    }
+    </ItemColContent>
+</MDataTable>

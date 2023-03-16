@@ -1,92 +1,18 @@
 ﻿@page "/clockin"
-
+@using Worker.Blazor.Wasm.Pages.Clockins
 <MRow>
     <MCol Cols="3">
         <span>选择部门：</span>
-        <MSelect Solo TItem="Department"
-                 TItemValue="string"
-                 TValue="string"
-                 @bind-Value="_select"
-                 Items="_states"
-                 ItemText="r=>r.DepartName"
-                 ItemValue="r=>r.Id"
-                 Label="Select"
-                 PersistentHint
-                 OnSelectedItemUpdate="item=>_selected=item">
-        </MSelect>
+        <Clockin_Select_Department></Clockin_Select_Department>
     </MCol>
     <MCol Cols="3">
-                     <span>选择打卡时间：</span>
-                        <MMenu @bind-Value="_menu2"
-                               CloseOnContentClick="false"
-                               NudgeRight="40"
-                               Transition="scale-transition"
-                               OffsetY
-                               MinWidth="@("auto")">
-                            <ActivatorContent>
-                                <MTextField @bind-Value="_date"
-                                            Label="Picker without buttons"
-                                            PrependIcon="mdi-calendar"
-                                                    Readonly
-                                                    Solo
-                                            @attributes="context.Attrs"></MTextField>
-                            </ActivatorContent>
-                            <ChildContent>
-                                <MDatePicker @bind-Value="_date"
-                                             OnInput="()=>_menu2=false"
-                                HeaderDateFormat="@(d=>d.Year+"年"+d.Month+"月")"
-                                WeekdayFormat="@(d=>GetWeek(d.DayOfWeek))"
-                                TitleDateFormat="@(d=>GetWeek(d[0].DayOfWeek)+","+d[0].Month+"月"+d[0].Day+"日")"></MDatePicker>
-                            </ChildContent>
-                            </MMenu>
+        <span>选择打卡时间：</span>
+        <Clockin_DatePicker></Clockin_DatePicker>
     </MCol>
 </MRow>
 
 <MRow>
-    <MDataTable Headers="_headers"
-            Items="_desserts"
-            FixedHeader="true"
-            FixedRight="true"
-            Height="600"
-            HideDefaultFooter="true"
-            Class="elevation-1">
-            <ItemColContent>
-                @if (context.Header.Value == "Morning")
-                {
-                    <MSwitch @bind-Value="context.Item.Morning"
-                            Inset></MSwitch>
-            }
-            else if(context.Header.Value == "AvatarsPath")
-            {
-                <MAvatar>
-		<MImage Src="@context.Item.AvatarsPath" Alt="@context.Item.Name"></MImage>
-	</MAvatar>
-            }
-            else if(context.Header.Value == "Afternoon")
-                {
-                    <MSwitch @bind-Value="context.Item.Afternoon"
-                            Inset></MSwitch>
-                }
-                else if(context.Header.Value == "JiaBan")
-                {
-                    <MTextField
-                        @bind-Value="context.Item.JiaBan"
-	                Solo>
-                    </MTextField>
-                }
-                else if(context.Header.Value == "Mark")
-                {
-                                        <MTextField
-                        @bind-Value="context.Item.Mark"
-	                Solo>
-                    </MTextField>
-                }
-                else
-                {
-                    @context.Value
-                }
-            </ItemColContent>
-        </MDataTable>
+    <Clockin_Table></Clockin_Table>
 </MRow>
 
 
@@ -104,7 +30,7 @@
         public string LastClockinDate{ get; set; }
     }
 
-    private List<DataTableHeader<ClockinItem>> _headers = new List<DataTableHeader<ClockinItem>>
+    protected List<DataTableHeader<ClockinItem>> _headers = new List<DataTableHeader<ClockinItem>>
         {
            new ()
            {
@@ -125,7 +51,7 @@
           new (){ Text= "最后考勤时间", Value= nameof(ClockinItem.LastClockinDate)}
         };
 
-    private List<ClockinItem> _desserts = new List<ClockinItem>
+    protected List<ClockinItem> _desserts = new List<ClockinItem>
         {
            new ClockinItem
            {

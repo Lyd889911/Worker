@@ -8,19 +8,19 @@
         <h5 class="mt-2 mb-12">Welcome to Masa.Blazor.Pro! 👋</h5>
 
         <MTextField TValue="string"
-                    Label="Email"
-                    Placeholder="john@example.com"
-                    Outlined
+                    Label="账号"
+                    Placeholder="请输入账号"
+
                     HideDetails="@("auto")">
         </MTextField>
         <MTextField TValue="string"
                     Class="mt-10"
-                    Label="Password"
+                    Label="密码"
                     Type="@(_show ? "text" : "password")"
-                    Placeholder="john@example.com"
+                    Placeholder="请输入密码"
                     AppendIcon="@(_show ? "mdi-eye" : "mdi-eye-off")"
                     OnAppendClick="()=>_show = !_show"
-                    Outlined
+
                     HideDetails="@("auto")">
         </MTextField>
         <span class="d-flex justify-end mt-1 text-caption hover-pointer">@*@onclick=@(()=>Navigation.NavigateTo(Navigation.BaseUri+ForgotPasswordRoute))*@

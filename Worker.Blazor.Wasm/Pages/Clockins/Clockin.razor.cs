@@ -1,21 +1,21 @@
-﻿namespace Worker.Blazor.Wasm.Pages
+﻿namespace Worker.Blazor.Wasm.Pages.Clockins
 {
     public partial class Clockin
     {
-        private bool _menu2;
-        private DateOnly _date = DateOnly.FromDateTime(DateTime.Now);
+        protected bool _menu2;
+        protected DateOnly _date = DateOnly.FromDateTime(DateTime.Now);
         public class Department
         {
             public string Id { get; set; }
             public string DepartName { get; set; }
         }
-        private string _select = "全部部门";
-        private Department _selected = new Department()
+        protected string _select = "全部部门";
+        protected Department _selected = new Department()
         {
             DepartName = "全部部门",
             Id="0"
         };
-        private List<Department> _states = new List<Department>
+        protected List<Department> _states = new List<Department>
         {
             new Department
             {
@@ -48,7 +48,7 @@
                 Id="5"
             }
         };
-        private string GetWeek(DayOfWeek dw)
+        protected string GetWeek(DayOfWeek dw)
         {
             switch (dw.ToString())
             {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace Worker.Blazor.Wasm.Pages
+namespace Worker.Blazor.Wasm.Pages.Logins
 {
     public partial class LoginBase
     {

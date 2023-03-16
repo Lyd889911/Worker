@@ -1,0 +1,48 @@
+﻿@inherits Clockin
+
+<MDataTable Headers="_headers"
+            Items="_desserts"
+            FixedHeader="true"
+            FixedRight="true"
+            Height="600"
+            HideDefaultFooter="true"
+            Class="elevation-1">
+    <ItemColContent>
+        @if (context.Header.Value == "Morning")
+        {
+            <MSwitch @bind-Value="context.Item.Morning"
+                      Inset>
+        </MSwitch>
+        }
+        else if (context.Header.Value == "AvatarsPath")
+        {
+            <MAvatar>
+                <MImage Src="@context.Item.AvatarsPath"
+                        Alt="@context.Item.Name">
+                </MImage>
+            </MAvatar>
+        }
+        else if (context.Header.Value == "Afternoon")
+        {
+            <MSwitch @bind-Value="context.Item.Afternoon"
+                      Inset>
+        </MSwitch>
+        }
+        else if (context.Header.Value == "JiaBan")
+        {
+            <MTextField @bind-Value="context.Item.JiaBan"
+                            Solo>
+        </MTextField>
+        }
+        else if (context.Header.Value == "Mark")
+        {
+            <MTextField @bind-Value="context.Item.Mark"
+                            Solo>
+        </MTextField>
+        }
+        else
+        {
+            @context.Value
+        }
+    </ItemColContent>
+</MDataTable>

@@ -3,126 +3,142 @@
 
 <MRow>
     <MCol Cols="3">
-        <MSelect Solo TItem="Model"
-                 TItemValue="string"
-                 TValue="string"
-                 @bind-Value="_select"
-                 Hint="@($"{_selected.State}, {_selected.Abbr}")"
-                 Items="_states"
-                 ItemText="r=>r.State"
-                 ItemValue="r=>r.Abbr"
-                 Label="Select"
-                 PersistentHint
-                 OnSelectedItemUpdate="item=>_selected=item">
+        <MSelect 
+            Solo 
+            TItem="Model"
+            TItemValue="string"
+            TValue="string"
+            @bind-Value="_select"
+            Hint="@($"{_selected.State}, {_selected.Abbr}")"
+            Items="_states"
+            ItemText="r=>r.State"
+            ItemValue="r=>r.Abbr"
+            Label="Select"
+            PersistentHint
+            OnSelectedItemUpdate="item=>_selected=item">
         </MSelect>
     </MCol>
     <MCol Cols="3">
-        <MSelect Solo TItem="Model"
-                 TItemValue="string"
-                 TValue="string"
-                 @bind-Value="_select"
-                 Hint="@($"{_selected.State}, {_selected.Abbr}")"
-                 Items="_states"
-                 ItemText="r=>r.State"
-                 ItemValue="r=>r.Abbr"
-                 Label="Select"
-                 PersistentHint
-                 OnSelectedItemUpdate="item=>_selected=item">
+        <MSelect 
+            Solo 
+            TItem="Model"
+            TItemValue="string"
+            TValue="string"
+            @bind-Value="_select"
+            Hint="@($"{_selected.State}, {_selected.Abbr}")"
+            Items="_states"
+            ItemText="r=>r.State"
+            ItemValue="r=>r.Abbr"
+            Label="Select"
+            PersistentHint
+            OnSelectedItemUpdate="item=>_selected=item">
         </MSelect>
     </MCol>
     <MCol Cols="3">
-        <MTextField @bind-Value="_message1"
-                    Solo
-                    Clearable
-                    Hint="请输入检索内容">
+        <MTextField 
+            @bind-Value="_message1"
+            Solo
+            Clearable
+            Hint="请输入检索内容">
         </MTextField>
     </MCol>
     <MCol Cols="3">
-        <MButton Fab
-                 Dark
-                 Color="indigo">
+        <MButton 
+            Fab
+            Dark
+            Color="indigo">
             <MIcon>mdi-account-search</MIcon>
         </MButton>
 
-        <PModal @bind-Value="value"
-                Persistent
-                Title="添加员工"
-                Width="1000"
-                SaveProps="props => props.Outlined = true"
-                CancelProps="@(props => props.Color = "orange")"
-                DeleteProps="@(props => props.Style = "font-weight:bold;")"
-                OnSave="OnSave"
-                OnCancel="OnCancel"
-                OnDelete="OnDelete">
+        <PModal 
+            @bind-Value="value"
+            Persistent
+            Title="添加员工"
+            Width="1000"
+            SaveProps="props => props.Outlined = true"
+            CancelProps="@(props => props.Color = "orange")"
+            DeleteProps="@(props => props.Style = "font-weight:bold;")"
+            OnSave="OnSave"
+            OnCancel="OnCancel"
+            OnDelete="OnDelete">
             <ActivatorContent>
-                <MButton Color="pink"
-                          Dark
-                          Fab
-                         @attributes="@context.Attrs">
-                    <MIcon>
-                        mdi-plus
-                    </MIcon>
+                <MButton 
+                    Color="pink"
+                    Dark
+                    Fab
+                    @attributes="@context.Attrs">
+                    <MIcon>mdi-plus</MIcon>
                 </MButton>
             </ActivatorContent>
             <ChildContent>
                 <MRow>
                     <MCol Cols="4">
                         <span>姓名：</span>
-                        <MTextField @bind-Value="_name"
-                                        Solo
-                                        Clearable
-                                    Hint="请输入员工的姓名"></MTextField>
-                        </MCol>
-                        <MCol Cols="3">
+                        <MTextField 
+                            @bind-Value="_name"
+                            Solo
+                            Clearable
+                            Hint="请输入员工的姓名">
+                        </MTextField>
+                    </MCol>
+                    <MCol Cols="3">
                         <span>选择职业：</span>
-                        <MSelect Solo TItem="Model"
-                                 TItemValue="string"
-                                 TValue="string"
-                                 @bind-Value="_select"
-                                 Hint="@($"{_selected.State}, {_selected.Abbr}")"
-                                 Items="_states"
-                                 ItemText="r=>r.State"
-                                 ItemValue="r=>r.Abbr"
-                                 Label="Select"
-                                  PersistentHint
-                                 OnSelectedItemUpdate="item=>_selected=item">
+                        <MSelect 
+                            Solo 
+                            TItem="Model"
+                            TItemValue="string"
+                            TValue="string"
+                            @bind-Value="_select"
+                            Hint="@($"{_selected.State}, {_selected.Abbr}")"
+                            Items="_states"
+                            ItemText="r=>r.State"
+                            ItemValue="r=>r.Abbr"
+                            Label="Select"
+                            PersistentHint
+                            OnSelectedItemUpdate="item=>_selected=item">
                         </MSelect>
-                        </MCol>
-                        <MCol Cols="3">
+                    </MCol>
+                    <MCol Cols="3">
                         <span>选择部门：</span>
-                        <MSelect Solo TItem="Model"
-                                 TItemValue="string"
-                                 TValue="string"
-                                 @bind-Value="_select"
-                                 Hint="@($"{_selected.State}, {_selected.Abbr}")"
-                                 Items="_states"
-                                 ItemText="r=>r.State"
-                                 ItemValue="r=>r.Abbr"
-                                 Label="Select"
-                                  PersistentHint
-                                 OnSelectedItemUpdate="item=>_selected=item">
+                        <MSelect 
+                            Solo 
+                            TItem="Model"
+                            TItemValue="string"
+                            TValue="string"
+                            @bind-Value="_select"
+                            Hint="@($"{_selected.State}, {_selected.Abbr}")"
+                            Items="_states"
+                            ItemText="r=>r.State"
+                            ItemValue="r=>r.Abbr"
+                            Label="Select"
+                            PersistentHint
+                            OnSelectedItemUpdate="item=>_selected=item">
                         </MSelect>
-                        </MCol>
-                        <MCol Cols="2">
+                    </MCol>
+                    <MCol Cols="2">
                         <span>操作状态：</span>
-                        <MSelect Solo TItem="Model"
-                                 TItemValue="string"
-                                 TValue="string"
-                                 @bind-Value="_select"
-                                 Hint="@($"{_selected.State}, {_selected.Abbr}")"
-                                 Items="_states"
-                                 ItemText="r=>r.State"
-                                 ItemValue="r=>r.Abbr"
-                                 Label="Select"
-                                  PersistentHint
-                                 OnSelectedItemUpdate="item=>_selected=item">
+                        <MSelect 
+                            Solo 
+                            TItem="Model"
+                            TItemValue="string"
+                            TValue="string"
+                            @bind-Value="_select"
+                            Hint="@($"{_selected.State}, {_selected.Abbr}")"
+                            Items="_states"
+                            ItemText="r=>r.State"
+                            ItemValue="r=>r.Abbr"
+                            Label="Select"
+                            PersistentHint
+                            OnSelectedItemUpdate="item=>_selected=item">
                         </MSelect>
-                        </MCol>
-                        </MRow>
-                        <MRow>
-                        <MCol Cols="2">
+                    </MCol>
+                </MRow>
+                <MRow>
+                    <MCol Cols="2">
                         <span>选择性别：</span>
-                        <MRadioGroup @bind-Value="_sex" Row>
+                        <MRadioGroup 
+                            @bind-Value="_sex" 
+                            Row>
                             <ChildContent>
                                 <MRadio Value="@("男")">
                                     <LabelContent>
@@ -139,121 +155,147 @@
                     </MCol>
                     <MCol Cols="2">
                         <span>日薪：</span>
-                        <MTextField @bind-Value="_name"
-                                        Solo
-                                        Clearable
-                                    Hint="请输入该员工的日薪"></MTextField>
-                        </MCol>
-                        <MCol Cols="2">
+                        <MTextField 
+                            @bind-Value="_name"
+                            Solo
+                            Clearable
+                            Hint="请输入该员工的日薪">
+                        </MTextField>
+                    </MCol>
+                    <MCol Cols="2">
                         <span>时薪：</span>
-                        <MTextField @bind-Value="_name"
-                                        Solo
-                                        Clearable
-                                    Hint="请输入该员工的时薪"></MTextField>
-                        </MCol>
-                        <MCol Cols="3">
+                        <MTextField 
+                            @bind-Value="_name"
+                            Solo
+                            Clearable
+                            Hint="请输入该员工的时薪">
+                        </MTextField>
+                    </MCol>
+                    <MCol Cols="3">
                         <span>选择入职时间：</span>
-                        <MMenu @bind-Value="_menu2"
-                               CloseOnContentClick="false"
-                               NudgeRight="40"
-                               Transition="scale-transition"
-                               OffsetY
-                               MinWidth="@("auto")">
+                        <MMenu 
+                            @bind-Value="_menu2"
+                            CloseOnContentClick="false"
+                            NudgeRight="40"
+                            Transition="scale-transition"
+                            OffsetY
+                            MinWidth="@("auto")">
                             <ActivatorContent>
-                                <MTextField @bind-Value="_date"
-                                            Label="Picker without buttons"
-                                            PrependIcon="mdi-calendar"
-                                                    Readonly
-                                                    Solo
-                                            @attributes="context.Attrs"></MTextField>
+                                <MTextField 
+                                    @bind-Value="_date"
+                                    Label="Picker without buttons"
+                                    PrependIcon="mdi-calendar"
+                                    Readonly
+                                    Solo
+                                    @attributes="context.Attrs">
+                                </MTextField>
                             </ActivatorContent>
                             <ChildContent>
-                                <MDatePicker @bind-Value="_date"
-                                             OnInput="()=>_menu2=false"></MDatePicker>
+                                <MDatePicker 
+                                    @bind-Value="_date"
+                                    OnInput="()=>_menu2=false">
+                                </MDatePicker>
                             </ChildContent>
-                            </MMenu>
-                            </MCol>
-                            <MCol Cols="3">
-                            <span>请选择头像照片：</span>
-                            <MFileInput TValue="IBrowserFile"
-                                    Accept="image/*"
-                                        Solo
-                                    TruncateLength="15">
+                        </MMenu>
+                    </MCol>
+                    <MCol Cols="3">
+                        <span>请选择头像照片：</span>
+                        <MFileInput 
+                            TValue="IBrowserFile"
+                            Accept="image/*"
+                            Solo
+                            TruncateLength="15">
                         </MFileInput>
-                        </MCol>
-                        </MRow>
-                        <MRow>
-                        <MCol Cols="9">
+                    </MCol>
+                </MRow>
+                <MRow>
+                    <MCol Cols="9">
                         <MRow>
                             <MCol Cols="6">
                                 <span>电话：</span>
-                                <MTextField @bind-Value="_name"
-                                                Solo
-                                                Clearable
-                                            Hint="请输入电话"></MTextField>
-                                </MCol>
-                                <MCol Cols="6">
+                                <MTextField 
+                                    @bind-Value="_name"
+                                    Solo
+                                    Clearable
+                                    Hint="请输入电话">
+                                </MTextField>
+                            </MCol>
+                            <MCol Cols="6">
                                 <span>身份证：</span>
-                                <MTextField @bind-Value="_name"
-                                                Solo
-                                                Clearable
-                                            Hint="请输入身份证号"></MTextField>
-                                </MCol>
-                                </MRow>
-                                <MRow>
-                                <MCol Cols="6">
+                                <MTextField 
+                                    @bind-Value="_name"
+                                    Solo
+                                    Clearable
+                                    Hint="请输入身份证号">
+                                </MTextField>
+                            </MCol>
+                        </MRow>
+                        <MRow>
+                            <MCol Cols="6">
                                 <span>银行卡号：</span>
-                                <MTextField @bind-Value="_name"
-                                                Solo
-                                                Clearable
-                                            Hint="请输入银行卡号"></MTextField>
-                                </MCol>
-                                <MCol Cols="6">
+                                <MTextField 
+                                    @bind-Value="_name"
+                                    Solo
+                                    Clearable
+                                    Hint="请输入银行卡号">
+                                </MTextField>
+                            </MCol>
+                            <MCol Cols="6">
                                 <span>开户行名：</span>
-                                <MTextField @bind-Value="_name"
-                                                Solo
-                                                Clearable
-                                            Hint="请输入开户行名"></MTextField>
-                                </MCol>
-                                </MRow>
-                                </MCol>
-                                <MCol Cols="3">
-                                <MCard Elevation="10" Rounded="true">
-                                <MImage AspectRatio="1.1"
-                                    Width="300"
-                                    Src="https://cdn.masastack.com/stack/images/website/masa-blazor/parallax/material.jpg"></MImage>
-                                </MCard>
-                                </MCol>
-                                </MRow>
+                                <MTextField 
+                                    @bind-Value="_name"
+                                    Solo
+                                    Clearable
+                                    Hint="请输入开户行名">
+                                </MTextField>
+                            </MCol>
+                        </MRow>
+                    </MCol>
+                    <MCol Cols="3">
+                        <MCard 
+                            Elevation="10" 
+                            Rounded="true">
+                            <MImage 
+                                AspectRatio="1.1"
+                                Width="300"
+                                Src="https://cdn.masastack.com/stack/images/website/masa-blazor/parallax/material.jpg">
+                            </MImage>
+                        </MCard>
+                    </MCol>
+                </MRow>
 
-                            </ChildContent>
-                            </PModal>
+            </ChildContent>
+        </PModal>
 
     </MCol>
 </MRow>
 
 <MRow>
     <MCol Cols="12">
-        <MDataTable Headers="_headers"
-                    Items="GetWorkers()"
-                    ItemsPerPage="10"
-                    Class="elevation-1"
-                    HideDefaultFooter="true"
-                    ItemKey="x=>x.Name"
-                    Search="@_message1"
-                    Width="@("120%")"
-                    FixedRight>
+        <MDataTable 
+            Headers="_headers"
+            Items="GetWorkers()"
+            ItemsPerPage="10"
+            Class="elevation-1"
+            HideDefaultFooter="true"
+            ItemKey="x=>x.Name"
+            Search="@_message1"
+            Width="@("120%")"
+            FixedRight>
             <ItemColContent>
-                @if (context.Header.Value == "actions")
-                {
-                    <MIcon Small
-                       Class="mr-2"
-                       OnClick="()=>EditItem(context.Item)">mdi-pencil</MIcon>
-                }
-                else
-                {
-                    @context.Value
-                }
+            @if (context.Header.Value == "actions")
+            {
+                <MIcon 
+                    Small
+                    Class="mr-2"
+                    OnClick="()=>EditItem(context.Item)">
+                    mdi-pencil
+                </MIcon>
+            }
+            else
+            {
+                @context.Value
+            }
             </ItemColContent>
         </MDataTable>
     </MCol>
@@ -262,7 +304,10 @@
 <MRow>
     <MCol Cols="6" Offset="3">
         <div class="text-center">
-            <MPagination @bind-Value="_index" Length=@_total></MPagination>
+            <MPagination 
+                @bind-Value="_index" 
+                Length=@_total>
+            </MPagination>
         </div>
     </MCol>
 </MRow>

@@ -1,0 +1,26 @@
+﻿@inherits Clockin
+
+<MMenu @bind-Value="_menu2"
+       CloseOnContentClick="false"
+       NudgeRight="40"
+       Transition="scale-transition"
+       OffsetY
+       MinWidth="@("auto")">
+    <ActivatorContent>
+        <MTextField @bind-Value="_date"
+            Label="Picker without buttons"
+            PrependIcon="mdi-calendar"
+                Readonly
+                Solo
+            @attributes="@context.Attrs">
+        </MTextField>
+    </ActivatorContent>
+    <ChildContent>
+        <MDatePicker @bind-Value="_date"
+            OnInput="()=>_menu2=false"
+            HeaderDateFormat="@(d=>d.Year+"年"+d.Month+"月")"
+            WeekdayFormat="@(d=>GetWeek(d.DayOfWeek))"
+            TitleDateFormat="@(d=>GetWeek(d[0].DayOfWeek)+","+d[0].Month+"月"+d[0].Day+"日")">
+        </MDatePicker>
+    </ChildContent>
+</MMenu>
