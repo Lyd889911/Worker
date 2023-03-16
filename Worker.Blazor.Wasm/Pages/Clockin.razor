@@ -1,7 +1,231 @@
 ﻿@page "/clockin"
 
-<h3>Clockin</h3>
+<MRow>
+    <MCol Cols="3">
+        <span>选择部门：</span>
+        <MSelect Solo TItem="Department"
+                 TItemValue="string"
+                 TValue="string"
+                 @bind-Value="_select"
+                 Items="_states"
+                 ItemText="r=>r.DepartName"
+                 ItemValue="r=>r.Id"
+                 Label="Select"
+                 PersistentHint
+                 OnSelectedItemUpdate="item=>_selected=item">
+        </MSelect>
+    </MCol>
+    <MCol Cols="3">
+                     <span>选择打卡时间：</span>
+                        <MMenu @bind-Value="_menu2"
+                               CloseOnContentClick="false"
+                               NudgeRight="40"
+                               Transition="scale-transition"
+                               OffsetY
+                               MinWidth="@("auto")">
+                            <ActivatorContent>
+                                <MTextField @bind-Value="_date"
+                                            Label="Picker without buttons"
+                                            PrependIcon="mdi-calendar"
+                                                    Readonly
+                                                    Solo
+                                            @attributes="context.Attrs"></MTextField>
+                            </ActivatorContent>
+                            <ChildContent>
+                                <MDatePicker @bind-Value="_date"
+                                             OnInput="()=>_menu2=false"
+                                HeaderDateFormat="@(d=>d.Year+"年"+d.Month+"月")"
+                                WeekdayFormat="@(d=>GetWeek(d.DayOfWeek))"
+                                TitleDateFormat="@(d=>GetWeek(d[0].DayOfWeek)+","+d[0].Month+"月"+d[0].Day+"日")"></MDatePicker>
+                            </ChildContent>
+                            </MMenu>
+    </MCol>
+</MRow>
+
+<MRow>
+    <MDataTable Headers="_headers"
+            Items="_desserts"
+            FixedHeader="true"
+            FixedRight="true"
+            Height="600"
+            HideDefaultFooter="true"
+            Class="elevation-1">
+            <ItemColContent>
+                @if (context.Header.Value == "Morning")
+                {
+                    <MSwitch @bind-Value="context.Item.Morning"
+                            Inset></MSwitch>
+            }
+            else if(context.Header.Value == "AvatarsPath")
+            {
+                <MAvatar>
+		<MImage Src="@context.Item.AvatarsPath" Alt="@context.Item.Name"></MImage>
+	</MAvatar>
+            }
+            else if(context.Header.Value == "Afternoon")
+                {
+                    <MSwitch @bind-Value="context.Item.Afternoon"
+                            Inset></MSwitch>
+                }
+                else if(context.Header.Value == "JiaBan")
+                {
+                    <MTextField
+                        @bind-Value="context.Item.JiaBan"
+	                Solo>
+                    </MTextField>
+                }
+                else if(context.Header.Value == "Mark")
+                {
+                                        <MTextField
+                        @bind-Value="context.Item.Mark"
+	                Solo>
+                    </MTextField>
+                }
+                else
+                {
+                    @context.Value
+                }
+            </ItemColContent>
+        </MDataTable>
+</MRow>
+
+
 
 @code {
+    public class ClockinItem
+    {
+        public string Id{ get; set; }
+        public string AvatarsPath{ get; set; }
+        public string Name { get; set; }
+        public bool Morning{ get; set; }
+        public bool Afternoon{ get; set; }
+        public decimal JiaBan{ get; set; }
+        public string Mark{ get; set; }
+        public string LastClockinDate{ get; set; }
+    }
 
-}
+    private List<DataTableHeader<ClockinItem>> _headers = new List<DataTableHeader<ClockinItem>>
+        {
+           new ()
+           {
+            Text= "头像",
+            Sortable= false,
+            Value= nameof(ClockinItem.AvatarsPath)
+          },
+           new ()
+           {
+            Text= "姓名",
+            Sortable= false,
+            Value= nameof(ClockinItem.Name)
+          },
+          new (){ Text= "上午考勤", Value= nameof(ClockinItem.Morning), Sortable= false,},
+          new (){ Text= "下午考勤", Value= nameof(ClockinItem.Afternoon), Sortable= false,},
+          new (){ Text= "加班时间", Value= nameof(ClockinItem.JiaBan), Sortable= false,},
+          new (){ Text= "备注记录", Value= nameof(ClockinItem.Mark), Sortable= false,},
+          new (){ Text= "最后考勤时间", Value= nameof(ClockinItem.LastClockinDate)}
+        };
+
+    private List<ClockinItem> _desserts = new List<ClockinItem>
+        {
+           new ClockinItem
+           {
+              Name= "Frozen Yogurt",
+              Morning=true,
+              Afternoon=false,
+              JiaBan=0,
+              Mark="",
+              LastClockinDate="2023-03-15",
+              AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png"
+            },
+            new ClockinItem
+            {
+              Name= "Ice cream sandwich",
+              Morning=false,
+              Afternoon=false,
+              JiaBan=0,
+              Mark="",
+              LastClockinDate="2023-03-15",
+              AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png"
+            },
+            new ClockinItem
+            {
+              Name= "Eclair",
+               Morning=false,
+              Afternoon=true,
+              JiaBan=0,
+              Mark="",
+              LastClockinDate="2023-03-15",
+              AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png"
+            },
+            new ClockinItem
+            {
+              Name= "Cupcake",
+              Morning=true,
+              Afternoon=false,
+              JiaBan=0,
+              Mark="",
+              LastClockinDate="2023-03-15",
+              AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png"
+            },
+            new ClockinItem
+            {
+                Name= "Gingerbread",
+               Morning=false,
+              Afternoon=false,
+              JiaBan=0,
+              Mark="",
+              LastClockinDate="2023-02-25",
+              AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png"
+            },
+            new ClockinItem
+            {
+                Name= "Jelly bean",
+                Morning=false,
+              Afternoon=false,
+              JiaBan=0,
+              Mark="",
+              LastClockinDate="2023-02-17",
+              AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png"
+            },
+            new ClockinItem
+            {
+                Name= "Lollipop",
+                  Morning=true,
+              Afternoon=false,
+              JiaBan=0,
+              Mark="",
+              LastClockinDate="2023-03-11",
+              AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png"
+            },
+            new ClockinItem
+            {
+                Name= "Honeycomb",
+               Morning=true,
+              Afternoon=false,
+              JiaBan=0,
+              Mark="",
+              LastClockinDate="2023-03-12",
+              AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png"
+            },
+            new ClockinItem
+            {
+                Name= "Donut",
+               Morning=true,
+              Afternoon=false,
+              JiaBan=0,
+              Mark="",
+              LastClockinDate="2023-01-15",
+              AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png"
+            },
+            new ClockinItem
+            {
+                Name= "KitKat",
+                   Morning=true,
+              Afternoon=false,
+              JiaBan=0,
+              Mark="",
+              LastClockinDate="2023-02-15",
+              AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png"
+            }
+        };
+  }

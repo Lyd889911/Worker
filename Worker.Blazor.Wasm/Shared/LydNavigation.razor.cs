@@ -10,6 +10,8 @@ namespace Worker.Blazor.Wasm.Shared
          new Item{ Title= "数据看板", Icon= "mdi-view-dashboard" ,Path="/dashboard"},
          new Item { Title= "打卡签到", Icon= "mdi-image",Path="/clockin"},
          new Item { Title= "员工管理", Icon= "mdi-help-box",Path="/employee" },
+         new Item { Title= "部门管理", Icon= "mdi-help-box",Path="/department" },
+         new Item { Title= "职位管理", Icon= "mdi-help-box",Path="/position" },
          new Item { Title= "考勤查看", Icon= "mdi-help-box",Path="/workstatistics" },
          new Item { Title= "施工日志", Icon= "mdi-help-box",Path="/worklog" },
          new Item { Title= "文件管理", Icon= "mdi-help-box",Path="/file" },

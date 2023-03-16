@@ -1,0 +1,96 @@
+﻿<MCard Width=510 Height=680 Class="mx-auto my-auto">
+    <div style="height:60px;"></div>
+    <div class="mt-2 mx-auto text-center" style="width:420px;">
+        <MAvatar Size=80>
+            <MImage Src="/img/avatar/1.svg">
+            </MImage>
+        </MAvatar>
+        <h5 class="mt-2 mb-12">Welcome to Masa.Blazor.Pro! 👋</h5>
+
+        <MTextField TValue="string"
+                    Label="Email"
+                    Placeholder="john@example.com"
+                    Outlined
+                    HideDetails="@("auto")">
+        </MTextField>
+        <MTextField TValue="string"
+                    Class="mt-10"
+                    Label="Password"
+                    Type="@(_show ? "text" : "password")"
+                    Placeholder="john@example.com"
+                    AppendIcon="@(_show ? "mdi-eye" : "mdi-eye-off")"
+                    OnAppendClick="()=>_show = !_show"
+                    Outlined
+                    HideDetails="@("auto")">
+        </MTextField>
+        <span class="d-flex justify-end mt-1 text-caption hover-pointer">@*@onclick=@(()=>Navigation.NavigateTo(Navigation.BaseUri+ForgotPasswordRoute))*@
+            Forgot Password?
+        </span>
+        <MButton Class="mt-11 rounded-4 text-btn white--text" OnClick=OnLogin Height=46 Width=340 Color="primary">Login</MButton>
+
+        <div class="my-6">
+            <span class="text-btn">New on our platform? &nbsp;</span>
+            <span class="primary--text hover-pointer">Create an account</span>@*@onclick="@(()=>Navigation.NavigateTo(Navigation.BaseUri+CreateAccountRoute))"*@
+        </div>
+        <div class="d-flex block-center">
+            <div style="height:0.5px;width:152px;" class="neutral-lighten-5"></div>
+            <span class="text-caption mx-4">or login with</span>
+            <div style="height:0.5px;width:152px;" class="neutral-lighten-5"></div>
+        </div>      
+        <div class="mt-4">
+            <MIcon Size=24 Color="neutral-lighten-2" OnClick="()=>{}">fab fa-codepen</MIcon>
+            <MIcon Size=24 Color="neutral-lighten-2" Class="ml-6" OnClick="()=>{}">fab fa-github</MIcon>
+            <MIcon Size=24 Color="neutral-lighten-2" Class="ml-6" OnClick="()=>{}">fab fa-twitter</MIcon>
+            <MIcon Size=24 Color="neutral-lighten-2" Class="ml-6" OnClick="()=>{}">fab fa-instagram</MIcon>
+        </div>
+    </div>
+</MCard>
+<style>
+    .text-caption {
+    /* Caption-说明 */
+    font-family: Roboto !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 0.75rem !important;
+    line-height: 1.125rem !important;
+    /* default color */
+    color: #A3AED0;
+}
+.hover-pointer {
+    cursor: pointer;
+}
+.rounded-4 {
+    border-radius: 20px !important;
+}
+.text-btn .m-label {
+    color: #323D6F;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+}
+.neutral-lighten-5 {
+    background-color: #E9EDF7;
+}
+.h5, .text-h5, h5 {
+    /* Headline 5 */
+    font-family: Roboto !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 1.5rem !important;
+    line-height: 2.25rem !important;
+    /* identical to box height */
+    /* default color */
+    color: #1B2559;
+}
+.theme--light.m-sheet {
+    background-color: #FFF;
+    border-color: #FFF;
+    color: rgba(0,0,0,.87)
+}
+.m-card {
+    box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 20%), 0px 0px 0px 0px rgb(0 0 0 / 14%), 0px 0px 0px 0px rgb(0 0 0 / 12%) !important;
+    border-radius: 20px !important;
+}
+</style>
