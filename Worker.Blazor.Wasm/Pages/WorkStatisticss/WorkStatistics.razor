@@ -1,0 +1,42 @@
+﻿@page "/workstatistics"
+@using Worker.Blazor.Wasm.Pages.WorkStatisticss
+<MRow>
+    <MCol Cols="3">
+        <WorkStatistics_DatePicker Date="Date"></WorkStatistics_DatePicker>
+    </MCol>
+    <MCol Cols="3">
+        <MTextField @bind-Value="Search"
+                    Solo
+                    Clearable
+                    Hint="请输入检索内容">
+        </MTextField>
+    </MCol>
+    <MCol Cols="1">
+        <MButton Fab
+                 Dark
+                 Color="indigo">
+            <MIcon>mdi-account-search</MIcon>
+        </MButton>
+    </MCol>
+</MRow>
+<MRow>
+    <MCol Cols="12">
+        <WorkStatistics_Table Search="@Search"></WorkStatistics_Table>
+    </MCol>
+</MRow>
+<MRow>
+    <MCol Cols="6" Offset="3">
+        <div class="text-center">
+            <MPagination @bind-Value="_index"
+                         Length=@_total>
+            </MPagination>
+        </div>
+    </MCol>
+</MRow>
+
+@code{
+    DateOnly Date = DateOnly.FromDateTime(DateTime.Now);
+    int _index = 1;
+    int _total = 3;
+    string Search = "";
+}

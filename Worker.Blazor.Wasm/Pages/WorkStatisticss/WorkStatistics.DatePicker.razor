@@ -1,0 +1,45 @@
+﻿<MMenu @bind-Value="IsShowDatePicker"
+       CloseOnContentClick="false"
+       NudgeRight="40"
+       Transition="scale-transition"
+       OffsetY
+       MinWidth="@("auto")">
+    <ActivatorContent>
+        <MTextField @bind-Value="Date"
+                    Label="Picker without buttons"
+                    PrependIcon="mdi-calendar"
+                        Readonly
+                        Solo
+                    @attributes="@context.Attrs">
+        </MTextField>
+    </ActivatorContent>
+    <ChildContent>
+        <MDatePicker @bind-Value="Date"
+                     OnInput="()=>IsShowDatePicker=false"
+                     Type="DatePickerType.Month"
+                     HeaderDateFormat="@(d=>d.Year+"年"+d.Month+"月")"
+                     MonthFormat="@(d=>d.Month+"月")"
+                     WeekdayFormat="@(d=>GetWeek(d.DayOfWeek))"
+                     TitleDateFormat="@(d=>GetWeek(d[0].DayOfWeek)+","+d[0].Month+"月"+d[0].Day+"日")">
+        </MDatePicker>
+    </ChildContent>
+</MMenu>
+    @code{
+    protected bool IsShowDatePicker;
+    [Parameter]
+    public DateOnly Date { get; set; }
+    protected string GetWeek(DayOfWeek dw)
+    {
+        switch (dw.ToString())
+        {
+            case "Sunday": return "周日";
+            case "Monday": return "周一";
+            case "Tuesday": return "周二";
+            case "Wednesday": return "周三";
+            case "Thursday": return "周四";
+            case "Friday": return "周五";
+            case "Saturday": return "周六";
+            default: return "";
+        }
+    }
+}

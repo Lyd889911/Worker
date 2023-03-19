@@ -1,6 +1,6 @@
 ﻿using BlazorComponent;
 
-namespace Worker.Blazor.Wasm.Pages
+namespace Worker.Blazor.Wasm.Pages.Employees
 {
     public partial class Employee
     {

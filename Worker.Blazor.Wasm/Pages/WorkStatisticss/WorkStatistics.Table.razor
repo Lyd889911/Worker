@@ -1,0 +1,88 @@
+﻿<MDataTable Headers="_headers"
+            Items="_workStatistics"
+            ItemsPerPage="10"
+            Class="elevation-1"
+            HideDefaultFooter="true"
+            ItemKey="x=>x.Name"
+            Width="@("120%")"
+            Search="@Search"
+            FixedRight>
+            <ItemColContent>
+            @if(context.Header.Value == "AvatarsPath")
+            {
+            <MAvatar>
+                <MImage Src="@context.Item.AvatarsPath"
+                        Alt="@context.Item.Name">
+                </MImage>
+            </MAvatar>
+            }
+            else
+            {
+                @context.Value
+            }
+            </ItemColContent>
+</MDataTable>
+
+@code{
+    [Parameter]
+    public string Search { get; set; }
+    public record WorkStatisticsItem
+    {
+        public string Name{ get; set; }
+        public string AvatarsPath{ get; set; }
+        public string Position{ get; set; }
+        public decimal WorkDay{ get; set; }
+        public decimal Jiaban{ get; set; }
+        public decimal Salary{ get; set; }
+    }
+    private List<DataTableHeader<WorkStatisticsItem>> _headers = new List<DataTableHeader<WorkStatisticsItem>>
+    {
+        new()
+        {
+            Text="头像",
+            Sortable=false,
+            Value=nameof(WorkStatisticsItem.AvatarsPath)
+        },
+        new ()
+        {
+        Text= "姓名",
+        Align= DataTableHeaderAlign.Start,
+        Sortable= false,
+        Value= nameof(WorkStatisticsItem.Name)
+        },
+        new (){ Text= "职位", Value= nameof(WorkStatisticsItem.Position)},
+        new (){ Text= "工作天数", Value= nameof(WorkStatisticsItem.WorkDay)},
+        new (){ Text= "加班时长", Value= nameof(WorkStatisticsItem.Jiaban)},
+        new (){ Text= "薪资", Value= nameof(WorkStatisticsItem.Salary)}
+    };
+    private List<WorkStatisticsItem> _workStatistics = new()
+    {
+        new()
+        {
+            AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png",
+            Name="张三",
+            Position="木匠",
+            WorkDay=22.5m,
+            Jiaban=23m,
+            Salary=8899
+        },
+                new()
+        {
+            AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png",
+            Name="李思",
+            Position="水泥",
+            WorkDay=21.5m,
+            Jiaban=3m,
+            Salary=6678
+        },
+                new()
+        {
+            AvatarsPath="https://cdn.masastack.com/stack/images/website/masa-blazor/jack.png",
+            Name="王武",
+            Position="地砖",
+            WorkDay=28.5m,
+            Jiaban=56m,
+            Salary=12890
+        },
+    };
+}
