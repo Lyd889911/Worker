@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Worker.Shared.BaseEntities;
+using Worker.Shared.BaseEntities.Contract;
 
 namespace Worker.Domain.Entities
 {
-    public class WorkerClockinStatistics:AggregateRoot
+    public class WorkerClockinStatistics:Entity,IHasCreationCreator,IHasModificationCreator,IHasDeleteCreator,IHasSoftDelete
     {
         /// <summary>
         /// 最后的打卡时间
         /// </summary>
-        public DateTime LastClockinTime { get; set; }
+        public DateTime? LastClockinTime { get; set; }
         /// <summary>
         /// 打卡的总共日期天数
         /// </summary>
@@ -38,5 +39,27 @@ namespace Worker.Domain.Entities
         /// </summary>
         public decimal TotalSalary { get; set; }
         public Guid WorkerId { get; set; }
+        public Worker? Worker { get; set; }
+        public Guid? CreatorId{get; set; }
+        public DateTime CreationTime { get; set; }
+        public DateTime? ModificationTime { get; set; }
+        public Guid? ModifierId { get; set; }
+        public Guid? DeleteCreatorId { get; set; }
+        public DateTime? DeleteTime { get; set; }
+        public bool IsDeleted { get; set; }
+        public WorkerClockinStatistics()
+        {
+
+        }
+        public WorkerClockinStatistics(Worker worker,Guid? CreatorId)
+        {
+            Worker = worker;
+            WorkerId = worker.Id;
+            this.CreatorId = CreatorId;
+            this.CreationTime=DateTime.Now;
+            this.ModifierId = CreatorId;
+            this.ModificationTime=DateTime.Now;
+            LastClockinTime = null;
+        }
     }
 }
